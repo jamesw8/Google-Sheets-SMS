@@ -30,7 +30,20 @@ def sms():
 	if num == NUMBER1 or num == NUMBER2:
 		# REMOVE option
 		if inp.split()[0] == 'rm':
-			sheetHelper.removeFromSheet(inp.split()[1])
+			sheet = sheetHelper.updateSheet()
+			if sheetHelper.delFromSheet( int(inp.split()[1]) ):
+				sheet = sheetHelper.updateSheet()
+				sendSheet(sheet)
+			else:
+				client.messages.create(
+			        to = num,
+			        from_ = NUMBER3,
+			        body = "Index is out of bounds"
+					)
+		# PRINT option
+		elif inp.split()[0] == 'print':
+			sheet = sheetHelper.updateSheet()
+			sendSheet(sheet)
 		# ADD option
 		else:
 			# Update sheet and add

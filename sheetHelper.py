@@ -52,4 +52,25 @@ def addToSheet(addInput):
 
 def delFromSheet(delInput):
 	values = retSheet['values']
-	d
+	success = True
+	try:
+		del values[delInput]
+		valueCount = len(values)
+		_range="Sheet1!B" + str(delInput+1) + ":B"
+		value = []
+		for v in values[delInput:]:
+			value.append(v)
+		value.append([''])
+		body = { 'values': value }
+
+		service.spreadsheets().values().update(
+			spreadsheetId=spreadsheet,
+			range=_range,
+			body = body,
+			valueInputOption="RAW"
+			).execute()
+		print(valueCount)
+		print(values)
+	except IndexError:
+		success = False
+	return success
