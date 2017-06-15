@@ -43,8 +43,9 @@ def sms():
 				sheet = sheetHelper.updateSheet()
 				sendSheet(sheet)
 			else:
+				app.logger.info("Index is out of bounds!")
 				client.messages.create(
-			        to = num,
+			        to = request.form['From'],
 			        from_ = NUMBER3,
 			        body = "Index is out of bounds"
 					)
