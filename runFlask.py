@@ -2,20 +2,28 @@ from flask import Flask, request, render_template
 from twilio.rest import Client
 import requests
 import sheetHelper
+import os
 app = Flask(__name__)
 
-f = open('twilioapi', 'r')
-n = open('numbers', 'r')
-acc = f.read().split()
-num = n.read().split()
-ACCOUNT_SID = acc[0]
-AUTH_TOKEN = acc[1]
-NUMBER1 = num[0]
-NUMBER2 = num[1]
-NUMBER3 = num[2]
-f.close()
-n.close()
-
+try:
+	f = open('twilioapi', 'r')
+	n = open('numbers', 'r')
+	acc = f.read().split()
+	num = n.read().split()
+	ACCOUNT_SID = acc[0]
+	AUTH_TOKEN = acc[1]
+	NUMBER1 = num[0]
+	NUMBER2 = num[1]
+	NUMBER3 = num[2]
+	f.close()
+	n.close()
+except:
+	ACCOUNT_SID = os.environ.get("twilio_sid")
+	AUTH_TOKEN = os.environ.get("twilio_token")
+	NUMBER1 = os.environ.get("number1")
+	NUMBER2 = os.environ.get("number2")
+	NUMBER3 = os.environ.get("number3")
+	 
 client = Client(ACCOUNT_SID, AUTH_TOKEN)
 
 @app.route('/')
