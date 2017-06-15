@@ -28,7 +28,7 @@ client = Client(ACCOUNT_SID, AUTH_TOKEN)
 
 @app.route('/')
 def index():
-	return 'Nothing to see here!'
+	return render_template("index.html")
 
 @app.route('/sms', methods=['POST']) # UPDATE FUNCTION
 def sms():
@@ -81,4 +81,5 @@ def sendSheet(sheet):
 		)
 
 if __name__ == "__main__":
-	app.run(host='0.0.0.0', port=5000)
+	port = os.environ.get("PORT", 5000)
+	app.run(host='0.0.0.0', port=port)
