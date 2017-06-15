@@ -23,7 +23,7 @@ except:
 	NUMBER1 = os.environ.get("number1")
 	NUMBER2 = os.environ.get("number2")
 	NUMBER3 = os.environ.get("number3")
-	 
+
 client = Client(ACCOUNT_SID, AUTH_TOKEN)
 
 @app.route('/')
@@ -81,4 +81,4 @@ def sendSheet(sheet):
 		)
 
 if __name__ == "__main__":
-	app.run(debug = True)
+	app.run(host='0.0.0.0', port=5000)
