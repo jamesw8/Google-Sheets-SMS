@@ -41,18 +41,18 @@ def sms():
 			sheet = sheetHelper.updateSheet()
 			if sheetHelper.delFromSheet( int(inp.split()[1]) ):
 				sheet = sheetHelper.updateSheet()
-				sendSheet(sheet)
+				sendSheet(sheet, num)
 			else:
 				app.logger.info("Index is out of bounds!")
 				client.messages.create(
-			        to = request.form['From'],
+			        to = num,
 			        from_ = NUMBER3,
 			        body = "Index is out of bounds"
 					)
 		# PRINT option
 		elif inp.split()[0] == 'print':
 			sheet = sheetHelper.updateSheet()
-			sendSheet(sheet)
+			sendSheet(sheet, num)
 		# ADD option
 		else:
 			# Update sheet and add
@@ -60,11 +60,11 @@ def sms():
 			sheetHelper.addToSheet(inp)
 			sheet = sheetHelper.updateSheet()
 			# Send sheet through SMS
-			sendSheet(sheet)
+			sendSheet(sheet, num)
 			
 	return 'hi'
 
-def sendSheet(sheet):
+def sendSheet(sheet, num):
 	newSheet = []
 	newSheet.append(''.join(sheet['values'][0]))
 	del sheet['values'][0]
