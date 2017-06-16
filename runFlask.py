@@ -37,7 +37,7 @@ def sms():
 	inp = request.form['Body']
 	if num == NUMBER1 or num == NUMBER2:
 		# REMOVE option
-		if inp.split()[0] == 'rm':
+		if inp.split()[0].lower() == 'rm':
 			sheet = sheetHelper.updateSheet()
 			if sheetHelper.delFromSheet( int(inp.split()[1]) ):
 				sheet = sheetHelper.updateSheet()
@@ -50,7 +50,7 @@ def sms():
 			        body = "Index is out of bounds"
 					)
 		# PRINT option
-		elif inp.split()[0] == 'print':
+		elif inp.split()[0].lower() == 'print':
 			sheet = sheetHelper.updateSheet()
 			sendSheet(sheet, num)
 		# ADD option
