@@ -18,6 +18,7 @@ try:
 	flow.params['access_type'] = 'offline'
 	credentials = storage.get()
 	if credentials is None or credentials.invalid:
+		print('hi')
 		credentials = tools.run_flow(flow, storage)
 except:
 	credentials = client.OAuth2Credentials(
@@ -39,11 +40,11 @@ try:
 except:
 	spreadsheet = os.environ.get("spreadsheet_id")
 
-_range = "Sheet1!B:B"
+_range = "Sheet1!C:C"
 retSheet = service.spreadsheets().values().get(
 		spreadsheetId=spreadsheet,
 		range=_range).execute()
-
+print(retSheet)
 def updateSheet():
 	global retSheet
 	retSheet = service.spreadsheets().values().get(
